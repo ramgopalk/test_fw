@@ -5,14 +5,14 @@ resource "azurerm_lb" "loadbalancer1" {
   location            = var.location
   resource_group_name = var.resourcegroup
 
-#   frontend_ip_configuration {
-#     name                 = "PublicIPAddress"
-#     public_ip_address_id = azurerm_public_ip.public_ip.id
+  frontend_ip_configuration {
+    name                 = "PublicIPAddress"
+    public_ip_address_id = azurerm_public_ip.public_ip.id
     # subnet_id                     = var.frontend_subnet1_id
     # private_ip_address            = var.frontend_private_ip_address
     # private_ip_address_allocation = var.frontend_private_ip_address_allocation
   }
-# }
+}
 
 
 # resource "azurerm_lb_backend_address_pool" "example" {
