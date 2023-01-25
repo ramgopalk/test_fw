@@ -1,7 +1,7 @@
 
 provider "azurerm" {
   features {}
-  azurerm_resource_group {
+  azurerm resource_group {
      prevent_deletion_if_contains_resources = false
 
   subscription_id = var.subscription_id
@@ -26,5 +26,6 @@ provider "azurerm" {
 resource "azurerm_resource_group" "resourcegroup" {
   name     = var.resourcegroup
   location = var.location
-
+  # azurerm resource_group {
+# │       prevent_deletion_if_contains_resources = false
 }
