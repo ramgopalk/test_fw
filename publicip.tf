@@ -11,7 +11,7 @@ resource "azurerm_public_ip" "public_ip" {
 }
 
 resource "azurerm_public_ip_prefix" "example" {
-  name                = "acceptanceTestPublicIpPrefix1"
+  name                = "TestPublicIpPrefix1"
   location            = var.location
   resource_group_name = var.resourcegroup
 
