@@ -1,3 +1,9 @@
+trigger:
+- main
+pool:
+  name: Azure Pipelines
+  vmImage: 'ubantu_latest'
+
 stages:
   - stage: PlanDev
     displayName: Terraform Plan Central Dev

@@ -1,5 +1,5 @@
 resource "azurerm_route_table" "routetable" {
-  depends_on          = [azurerm_virtual_machine.fgtvm_name]
+  # depends_on          = [azurerm_virtual_machine.fgtvm_name]
   name                = var.routetable
   location            = var.location
   resource_group_name = var.resourcegroup
@@ -11,7 +11,7 @@ resource "azurerm_route" "default" {
   route_table_name       = var.routetable
   address_prefix         = "0.0.0.0/0"
   next_hop_type          = "VirtualAppliance"
-  next_hop_in_ip_address = azurerm_network_interface.fgtport2.private_ip_address
+  next_hop_in_ip_address = azurerm_network_interface.test2.private_ip_address
 }
 
 # resource "azurerm_subnet_route_table_association" "internalassociate" {

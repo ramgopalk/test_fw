@@ -6,7 +6,7 @@ resource "azurerm_virtual_network" "vnet" {
   location            = var.location
   resource_group_name = var.resourcegroup
 
- 
+
 }
 
 
@@ -49,7 +49,7 @@ resource "azurerm_network_security_group" "publicnetworknsg" {
     destination_address_prefix = "*"
   }
 
- 
+
 }
 
 # resource "azurerm_network_security_group" "privatenetworknsg" {
@@ -99,7 +99,8 @@ resource "azurerm_network_security_rule" "outgoing_public" {
 # }
 
 # // FGT Network Interface port1
- resource "azurerm_network_interface" "fgtport1" {
+resource "azurerm_network_interface" "fgtport1" {
+  # count                = 2
   name                 = "fgtport1"
   location             = var.location
   resource_group_name  = var.resourcegroup
@@ -116,6 +117,7 @@ resource "azurerm_network_security_rule" "outgoing_public" {
 }
 
 resource "azurerm_network_interface" "fgtport2" {
+  # count                = 2
   name                 = "fgtport2"
   location             = var.location
   resource_group_name  = var.resourcegroup
@@ -126,7 +128,7 @@ resource "azurerm_network_interface" "fgtport2" {
     subnet_id                     = azurerm_subnet.subnet2.id
     private_ip_address_allocation = "Dynamic"
   }
- }
+}
 
 
 # # Connect the security group to the network interfaces
@@ -141,3 +143,33 @@ resource "azurerm_network_interface" "fgtport2" {
 # #   network_interface_id      = azurerm_network_interface.fgtport2.id
 # #   network_security_group_id = azurerm_network_security_group.privatenetworknsg.id
 # # }
+
+
+# resource "azurerm_network_interface" "test1" {
+#   count               = 2
+#   name                = "nic-1${count.index}"
+#   location            =var.location
+#   resource_group_name = var.resourcegroup
+
+#   ip_configuration {
+#     name = "testConfiguration"
+#     subnet_id                     = azurerm_subnet.subnet1.id
+#     # subnet_id                     = [azurerm_subnet.external.id, azurerm_subnet.internal.id]
+#     private_ip_address_allocation = "dynamic"
+#   }
+# }
+
+
+# resource "azurerm_network_interface" "test2" {
+#   count               = 2
+#   name                = "nic-2${count.index}"
+#   location            = var.location
+#   resource_group_name = var.resourcegroup
+
+#   ip_configuration {
+#     name = "testConfiguration"
+#     subnet_id                     = azurerm_subnet.subnet2.id
+#     # subnet_id                     = [azurerm_subnet.external.id, azurerm_subnet.internal.id]
+#     private_ip_address_allocation = "dynamic"
+#   }
+# }

@@ -16,11 +16,14 @@ variable "tenant_id" {
   default = "421b3bef-502a-4631-9b9b-2cebf650e2fb"
 }
 
-variable "fgtvm_name" {
-  type    = string
-  default = "fortgate_vm"
+# variable "fgtvm_name" {
+#   type    = string
+#   default = "fortgate_vm"
+# }
+variable "vmname" {
+  type    = list(string)
+  default = ["fgt_activevm_a", "fgt_activevm_b"]
 }
-
 variable "vm_size" {
   type    = string
   default = "Standard_F4"
@@ -76,12 +79,12 @@ variable "fgtversion" {
   default = "7.2.2"
 }
 
-variable "adminusername" {
+variable "admin_username" {
   type    = string
   default = "azureadmin"
 }
 
-variable "adminpassword" {
+variable "admin_password" {
   type    = string
   default = "Fortinet@123#"
 }
