@@ -1,0 +1,39 @@
+stages:
+  - stage: PlanDev
+    displayName: Terraform Plan Central Dev
+    jobs:
+      - job: PlanDev
+        displayName: Plan Dev
+        pool:
+          name: aci-es-agents
+
+        steps:
+          - checkout: self
+            clean: true
+          - task: TerraformTaskV2@2
+            displayName: Initialise Terraform
+            inputs:
+              provider: "azurerm"
+              command: "init"
+              workingDirectory: "$(System.DefaultWorkingDirectory)/central-resources"
+              backendServiceArm: $(azureResourceManagerConnection)
+              backendAzureRmResourceGroupName: $(stateResourceGroup)
+              backendAzureRmStorageAccountName: $(stateStorageAccount)
+              backendAzureRmContainerName: $(stateContainer)
+              backendAzureRmKey: "tf-$(env)-$(loc).tfstate"
+
+          - task: TerraformTaskV2@2
+            displayName: Terraform validate
+            inputs:
+              provider: "azurerm"
+              command: "validate"
+              workingDirectory: "$(System.DefaultWorkingDirectory)/central-resources"
+
+          - task: TerraformTaskV2@2
+            displayName: Terraform plan
+            inputs:
+              provider: "azurerm"
+              command: "plan"
+              workingDirectory: "$(System.DefaultWorkingDirectory)/central-resources"
+              commandOptions: '-out=tf.plan -var-file="./environments/$(env)-$(loc).tfvars"'
+              environmentServiceNameAzureRM: $(azureResourceManagerConnection)

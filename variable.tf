@@ -2,7 +2,7 @@
 variable "subscription_id" {
   type    = string
   default = "2c27975e-ce4f-421e-82ff-9e5080dc09c5"
-}
+} 
 variable "client_id" {
   type    = string
   default = "754f5cec-f1a0-4dc0-aa3c-b4cb7a37cd35"

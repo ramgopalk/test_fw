@@ -5,14 +5,13 @@ resource "azurerm_virtual_machine" "fgtvm_name" {
   network_interface_ids        = [azurerm_network_interface.fgtport1.id, azurerm_network_interface.fgtport2.id]
   primary_network_interface_id = azurerm_network_interface.fgtport1.id
   vm_size                      = var.vm_size
-#   instances                    = 2
+  #   instances                    = 2
 
   storage_image_reference {
     publisher = var.publisher
     offer     = var.fgtoffer
     sku       = var.fgtsku
-
-    version = var.fgtversion
+    version   = var.fgtversion
   }
 
   plan {
@@ -48,9 +47,9 @@ resource "azurerm_virtual_machine" "fgtvm_name" {
     disable_password_authentication = false
   }
 
-    # boot_diagnostics {
-    #   enabled     = true
-    #   storage_uri = azurerm_storage_account.storageaccount.primary_blob_endpoint
-    #     # storage_uri = var.storageaccount
-    # }
+  # boot_diagnostics {
+  #   enabled     = true
+  #   storage_uri = azurerm_storage_account.storageaccount.primary_blob_endpoint
+  #     # storage_uri = var.storageaccount
+  # }
 }
